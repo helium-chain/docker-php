@@ -29,6 +29,11 @@ RUN docker-php-ext-install opcache && docker-php-ext-enable opcache
 # 安装Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# 安装git
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache bash git openssh
+
 EXPOSE 9000
 
 ENTRYPOINT ["php-fpm"]
