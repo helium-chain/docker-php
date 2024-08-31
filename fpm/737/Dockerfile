@@ -15,7 +15,11 @@ RUN apk update && apk --no-cache add \
     openssl-dev \
     libzip-dev \
     unzip \
-    tzdata
+    tzdata \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    libwebp-dev \
+    freetype-dev
 
 # 安装Redis扩展
 RUN pecl install redis && docker-php-ext-enable redis
@@ -26,6 +30,13 @@ RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql
 # 安装opcache扩展
 RUN docker-php-ext-install opcache && docker-php-ext-enable opcache
  
+# 安装BCMath扩展
+RUN docker-php-ext-install bcmath && docker-php-ext-enable bcmath
+
+# 安装gd扩展
+RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype \
+    && docker-php-ext-install gd
+
 # 安装Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

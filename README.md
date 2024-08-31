@@ -8,3 +8,11 @@
 ```sh
 docker-compose -p lnmp up -d
 ```
+
+2. 给予目录权限：
+
+```sh
+chmod -R 777 ./storage/
+
+chmod -R 777 ./bootstrap/cache/
+```
